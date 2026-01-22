@@ -18,6 +18,8 @@
 - `VITE_IDP_AUTHORIZE_URL`
 - `VITE_IDP_TOKEN_URL`
 - `VITE_API_BASE_URL`
+- `SWAGGER_USER`
+- `SWAGGER_PASSWORD`
 
 자세한 내용은 `.env.example` 파일과 infisical을 참고해주세요.
 
@@ -79,11 +81,9 @@ bun run build-storybook
 ### 주요 명령어
 
 ```bash
-# 번역 키 추출 (개발 중 watch 모드 권장)
-bun run i18n:extract:watch
-
-# TypeScript 타입 생성 (개발 중 watch 모드 권장)
-bun run i18n:types:watch
+# 번역 키 추출 및 Typescript 타입 생성 (개발 중 watch 권장)
+bun run gen:i18n
+bun run gen:i18n:watch
 
 # 번역 상태 확인
 bun run i18n:status

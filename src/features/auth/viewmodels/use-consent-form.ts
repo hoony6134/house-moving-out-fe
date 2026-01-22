@@ -1,10 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { TFunction } from 'i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
+import type { components } from '@/@types/api-schema';
+
 import { useUserAuth } from './use-user-auth';
+
+import type { TFunction } from 'i18next';
+
+type ConsentVersionInfo = components['schemas']['ConsentVersionInfo'];
+type RequiredConsents = components['schemas']['RequiredConsents'];
+
+const isSameVersion = (versionInfo?: ConsentVersionInfo) =>
+  versionInfo != null && versionInfo.currentVersion === versionInfo.requiredVersion;
 
 const createConsentSchema = (t: TFunction<'auth'>) =>
   z.object({
@@ -18,7 +27,7 @@ const createConsentSchema = (t: TFunction<'auth'>) =>
 
 export type ConsentFormData = z.infer<ReturnType<typeof createConsentSchema>>;
 
-export const useConsentForm = () => {
+export const useConsentForm = (requiredConsents?: RequiredConsents) => {
   const { t } = useTranslation('auth');
   const { logIn } = useUserAuth({ showToast: true });
 
@@ -27,8 +36,8 @@ export const useConsentForm = () => {
   const form = useForm<ConsentFormData>({
     resolver: zodResolver(consentSchema),
     defaultValues: {
-      privacyPolicy: false,
-      termsOfService: false,
+      privacyPolicy: isSameVersion(requiredConsents?.privacy),
+      termsOfService: isSameVersion(requiredConsents?.terms),
     },
     mode: 'onChange',
   });
@@ -51,10 +60,13 @@ export const useConsentForm = () => {
 
   const onSubmit = form.handleSubmit(async (data) => {
     await logIn({
-      agreedToPrivacy: data.privacyPolicy,
-      agreedToTerms: data.termsOfService,
-      privacyVersion: '1.0.0',
-      termsVersion: '1.0.0',
+      body: {
+        agreedToPrivacy: data.privacyPolicy,
+        agreedToTerms: data.termsOfService,
+        // TODO: 버전 정보 및 내용 받아오기 - terms 사이트에서
+        privacyVersion: '1.0.0',
+        termsVersion: '1.0.0',
+      },
     });
   });
 
