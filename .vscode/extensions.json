@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "loccy.loccy",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+    ]
+}
