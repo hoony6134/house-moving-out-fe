@@ -1,33 +1,30 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useAuthContext } from 'react-oauth2-code-pkce';
 import { z } from 'zod';
-
-import type { components } from '@/@types/api-schema';
 
 import { useUserAuth } from './use-user-auth';
 
+import type { RequiredConsents } from '../models';
 import type { TFunction } from 'i18next';
-
-type ConsentVersionInfo = components['schemas']['ConsentVersionInfo'];
-type RequiredConsents = components['schemas']['RequiredConsents'];
-
-const isSameVersion = (versionInfo?: ConsentVersionInfo) =>
-  versionInfo != null && versionInfo.currentVersion === versionInfo.requiredVersion;
 
 const createConsentSchema = (t: TFunction<'auth'>) =>
   z.object({
-    privacyPolicy: z.boolean().refine((val) => val === true, {
-      error: t('consent.error.privacyPolicyRequired'),
+    privacy: z.boolean().refine((val) => val === true, {
+      error: t('consent.error.privacyRequired'),
     }),
-    termsOfService: z.boolean().refine((val) => val === true, {
-      error: t('consent.error.termsOfServiceRequired'),
+    tos: z.boolean().refine((val) => val === true, {
+      error: t('consent.error.tosRequired'),
     }),
+    privacyVersion: z.string(),
+    tosVersion: z.string(),
   });
 
 export type ConsentFormData = z.infer<ReturnType<typeof createConsentSchema>>;
 
-export const useConsentForm = (requiredConsents?: RequiredConsents) => {
+export const useConsentForm = (requiredConsents: RequiredConsents, formData?: ConsentFormData) => {
+  const { token } = useAuthContext();
   const { t } = useTranslation('auth');
   const { logIn } = useUserAuth({ showToast: true });
 
@@ -35,45 +32,49 @@ export const useConsentForm = (requiredConsents?: RequiredConsents) => {
 
   const form = useForm<ConsentFormData>({
     resolver: zodResolver(consentSchema),
-    defaultValues: {
-      privacyPolicy: isSameVersion(requiredConsents?.privacy),
-      termsOfService: isSameVersion(requiredConsents?.terms),
+    defaultValues: formData ?? {
+      privacy: requiredConsents.privacy.currentVersion === requiredConsents.privacy.requiredVersion,
+      tos: requiredConsents.terms.currentVersion === requiredConsents.terms.requiredVersion,
+      privacyVersion: requiredConsents.privacy.requiredVersion,
+      tosVersion: requiredConsents.terms.requiredVersion,
     },
     mode: 'onChange',
   });
 
-  const privacyPolicy = useWatch({
+  const privacy = useWatch({
     control: form.control,
-    name: 'privacyPolicy',
+    name: 'privacy',
   });
-  const termsOfService = useWatch({
+  const tos = useWatch({
     control: form.control,
-    name: 'termsOfService',
+    name: 'tos',
   });
-  const allChecked = privacyPolicy && termsOfService;
+  const allChecked = privacy && tos;
 
   const handleAllChange = (checked: boolean) => {
-    form.setValue('privacyPolicy', checked);
-    form.setValue('termsOfService', checked);
+    form.setValue('privacy', checked);
+    form.setValue('tos', checked);
     form.trigger();
   };
 
   const onSubmit = form.handleSubmit(async (data) => {
     await logIn({
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: {
-        agreedToPrivacy: data.privacyPolicy,
-        agreedToTerms: data.termsOfService,
-        // TODO: 버전 정보 및 내용 받아오기 - terms 사이트에서
-        privacyVersion: '1.0.0',
-        termsVersion: '1.0.0',
+        agreedToPrivacy: data.privacy,
+        agreedToTerms: data.tos,
+        privacyVersion: data.privacyVersion,
+        termsVersion: data.tosVersion,
       },
     });
   });
 
   return {
     form,
-    privacyPolicy,
-    termsOfService,
+    privacy,
+    tos,
     allChecked,
     handleAllChange,
     onSubmit,
