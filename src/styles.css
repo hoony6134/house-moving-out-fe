@@ -3,17 +3,7 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
 
-h1 {
-  font-size: var(--text-h1);
-  font-weight: var(--text-h1--font-weight);
-}
-
-h2 {
-  font-size: var(--text-h2);
-  font-weight: var(--text-h2--font-weight);
-}
-
-body {
+html {
   @apply m-0;
   font-family:
     'Pretendard Variable',
@@ -35,8 +25,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @theme {
@@ -48,6 +47,15 @@ code {
 
   --text-button: 20px;
   --text-button--font-weight: 700;
+
+  --text-modal-button: 18px;
+  --text-modal-button--font-weight: 600;
+
+  --text-modal-title: 20px;
+  --text-modal-title--font-weight: 600;
+
+  --text-modal-description: 18px;
+  --text-modal-description--font-weight: 600;
 
   --text-in-progress: 20px;
   --text-in-progress--font-weight: 600;
@@ -87,4 +95,24 @@ code {
   --color-icon-gray: #b4b4b4;
 
   --color-primary-main: #637457;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  font-weight: var(--text-h1--font-weight);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  font-weight: var(--text-h2--font-weight);
+}
+
+body,
+p {
+  font-size: var(--text-box);
+  font-weight: var(--text-box--font-weight);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
