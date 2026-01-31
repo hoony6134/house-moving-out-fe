@@ -10,7 +10,7 @@ export const useCreateMoveOutSchedule = () => {
   return $api.useMutation('post', ApiPaths.MoveOutController_createMoveOutSchedule, {
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['get', ApiPaths.MoveOutController_findMoveOutScheduleWithSlots],
+        queryKey: ['get', ApiPaths.MoveOutController_findAllMoveOutSchedules],
       });
     },
   });
