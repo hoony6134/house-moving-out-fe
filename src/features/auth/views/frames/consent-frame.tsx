@@ -9,8 +9,6 @@ import { useAuthPrompt, useConsentForm } from '../../viewmodels';
 
 import type { RequiredConsents } from '../../models';
 
-// FIXME: 디자인 수정되면 typography, color 토큰 사용해야 함
-
 export function ConsentFrame() {
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
   if (!requiredConsents) {
@@ -55,6 +53,7 @@ function ConsentInnerFrame({ requiredConsents }: { requiredConsents: RequiredCon
         <LanguageToggle />
       </div>
       <h1 className="mb-6 whitespace-pre-line">{t('consent.title')}</h1>
+      <img src="/house-logo.png" alt="house-logo" className="w-40" />
       <div className="mt-auto flex flex-col">
         <div className="flex flex-col gap-5">
           <label className="flex cursor-pointer items-center gap-3">
@@ -62,7 +61,7 @@ function ConsentInnerFrame({ requiredConsents }: { requiredConsents: RequiredCon
             <span>{t('consent.agreeAll')}</span>
           </label>
 
-          <div className="h-1 rounded-lg bg-gray-200" />
+          <div className="bg-icon-light-gray h-1 rounded-lg" />
 
           <div className="flex flex-col gap-3">
             <label className="flex cursor-pointer items-center gap-3">
@@ -74,7 +73,7 @@ function ConsentInnerFrame({ requiredConsents }: { requiredConsents: RequiredCon
                 className="flex items-center"
                 aria-label={t('consent.viewPrivacyPolicy')}
               >
-                <ChevronRight size={20} className="text-gray-500" />
+                <ChevronRight size={20} className="text-icon-gray" />
               </button>
             </label>
 
@@ -87,7 +86,7 @@ function ConsentInnerFrame({ requiredConsents }: { requiredConsents: RequiredCon
                 className="flex items-center"
                 aria-label={t('consent.viewTermsOfService')}
               >
-                <ChevronRight size={20} className="text-gray-500" />
+                <ChevronRight size={20} className="text-icon-gray" />
               </button>
             </label>
           </div>

@@ -6,8 +6,6 @@ import { Button, LanguageToggle } from '@/common/components';
 
 import { useAuth, useAuthRedirect } from '../../viewmodels';
 
-// FIXME: 디자인 수정되면 typography, color 토큰 사용해야 함
-
 export function LoginFrame() {
   const { t } = useTranslation('auth');
   const { idpLogIn } = useAuth();
@@ -19,11 +17,12 @@ export function LoginFrame() {
         <LanguageToggle />
       </div>
       <div className="flex flex-col items-center justify-center gap-2.5">
-        <h1>{t('title')}</h1>
-        <p>{t('subtitle')}</p>
+        <img src="/3d/logo.png" alt="logo" className="size-60" />
+        <h1 className="text-text-black">{t('title')}</h1>
+        <p className="text-text-gray">{t('subtitle')}</p>
       </div>
       <Button
-        className="mt-4"
+        className="mt-10"
         onClick={() => {
           useAuthRedirect.getState().setRedirect(redirect);
           idpLogIn();
