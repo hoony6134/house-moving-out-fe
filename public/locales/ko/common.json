@@ -1,8 +1,17 @@
 {
+  "error": {
+    "badRequest": "요청을 처리하지 못했습니다.",
+    "internalServerError": "일시적인 오류가 발생했습니다.",
+    "unauthorized": "로그인이 필요합니다."
+  },
   "fab": {
     "inquiry": "문의하기",
     "languageChange": "언어변경",
     "logout": "로그아웃"
+  },
+  "header": {
+    "subtitle": "학번: {{studentId}} | 호실: {{room}}",
+    "title": "{{name}}님의 퇴사 검사 현황"
   },
   "inquiryDrawer": {
     "email": "e-mail: gist_house@gist.ac.kr",
