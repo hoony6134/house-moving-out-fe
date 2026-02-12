@@ -9,16 +9,11 @@ export const Checkbox = forwardRef<
   Checkbox.Props & React.ComponentProps<'input'>
 >(({ className, ...props }, ref) => {
   return (
-    <div className="relative inline-flex items-center">
-      <input
-        type="checkbox"
-        ref={ref}
-        className={cn('peer absolute inset-0 size-6 cursor-pointer opacity-0', className)}
-        {...props}
-      />
-      <CheckedIcon className="hidden size-6 peer-checked:block" />
-      <UncheckedIcon className="block size-6 peer-checked:hidden" />
-    </div>
+    <span className={cn('inline-flex cursor-pointer items-center', className)}>
+      <input type="checkbox" ref={ref} className="peer sr-only" {...props} />
+      <CheckedIcon className="hidden size-4 peer-checked:block" />
+      <UncheckedIcon className="block size-4 peer-checked:hidden" />
+    </span>
   );
 });
 
