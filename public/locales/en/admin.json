@@ -22,15 +22,44 @@
   "article": {
     "create": {
       "back": "Back to list",
-      "placeholder": "The create form will be implemented in the next task.",
+      "submit": "Create",
+      "success": "Article has been created.",
       "title": "Create Notice/FAQ"
     },
     "edit": {
       "back": "Back to list",
       "notFound": "Article not found.",
-      "placeholder": "The edit form will be implemented in the next task.",
-      "preview": "Current title preview",
+      "submit": "Save changes",
+      "success": "Article has been updated.",
       "title": "Edit Notice/FAQ"
+    },
+    "form": {
+      "contentEn": {
+        "label": "Content (EN)",
+        "placeholder": "Enter English content."
+      },
+      "contentKo": {
+        "label": "Content (KO)",
+        "placeholder": "Enter Korean content."
+      },
+      "error": {
+        "formError": "Please check the form fields.",
+        "required": "This field is required."
+      },
+      "titleEn": {
+        "label": "Title (EN)",
+        "placeholder": "Enter English title."
+      },
+      "titleKo": {
+        "label": "Title (KO)",
+        "placeholder": "Enter Korean title."
+      },
+      "type": {
+        "label": "Article Type"
+      },
+      "visibility": {
+        "label": "Visibility"
+      }
     },
     "list": {
       "actions": {

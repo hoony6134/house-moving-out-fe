@@ -22,15 +22,44 @@
   "article": {
     "create": {
       "back": "목록으로",
-      "placeholder": "작성 폼은 다음 작업에서 구현됩니다.",
+      "submit": "작성 완료",
+      "success": "게시글이 작성되었습니다.",
       "title": "공지/FAQ 작성"
     },
     "edit": {
       "back": "목록으로",
       "notFound": "게시글을 찾을 수 없습니다.",
-      "placeholder": "수정 폼은 다음 작업에서 구현됩니다.",
-      "preview": "현재 제목 미리보기",
+      "submit": "수정 완료",
+      "success": "게시글이 수정되었습니다.",
       "title": "공지/FAQ 수정"
+    },
+    "form": {
+      "contentEn": {
+        "label": "본문 (EN)",
+        "placeholder": "영문 본문을 입력해주세요."
+      },
+      "contentKo": {
+        "label": "본문 (KO)",
+        "placeholder": "국문 본문을 입력해주세요."
+      },
+      "error": {
+        "formError": "입력 칸을 확인해주세요.",
+        "required": "필수 입력 항목입니다."
+      },
+      "titleEn": {
+        "label": "제목 (EN)",
+        "placeholder": "영문 제목을 입력해주세요."
+      },
+      "titleKo": {
+        "label": "제목 (KO)",
+        "placeholder": "국문 제목을 입력해주세요."
+      },
+      "type": {
+        "label": "게시글 유형"
+      },
+      "visibility": {
+        "label": "노출 여부"
+      }
     },
     "list": {
       "actions": {
