@@ -167,8 +167,17 @@
     "will_be_cleaned": "Will be cleaned"
   },
   "target": {
+    "action": {
+      "resetCleaningChanges": "Reset",
+      "saveCleaningChanges": "Save",
+      "savingCleaningChanges": "Saving..."
+    },
     "detail": {
       "admissionYear": "Admission Year",
+      "cleaningNoChanges": "No vendor cleaning changes",
+      "cleaningService": "Vendor Cleaning",
+      "cleaningUnsavedCount_one": "{{count}} unsaved vendor cleaning change",
+      "cleaningUnsavedCount_other": "{{count}} unsaved vendor cleaning changes",
       "inspectionCount": "# of Inspections",
       "lastInspection": "Last Inspection",
       "name": "Name",
@@ -177,6 +186,7 @@
       "type": "Inspection Type"
     },
     "error": {
+      "cleaningLockedByStatus": "Vendor cleaning cannot be edited for active schedules",
       "load": "Cannot load target room list"
     },
     "list": "Target Room List"

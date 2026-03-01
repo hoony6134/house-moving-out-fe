@@ -166,8 +166,16 @@
     "will_be_cleaned": "업체 청소"
   },
   "target": {
+    "action": {
+      "resetCleaningChanges": "변경 취소",
+      "saveCleaningChanges": "저장",
+      "savingCleaningChanges": "저장 중..."
+    },
     "detail": {
       "admissionYear": "학번",
+      "cleaningNoChanges": "업체 청소 변경사항이 없습니다",
+      "cleaningService": "업체 청소",
+      "cleaningUnsavedCount": "업체 청소 변경 {{count}}건",
       "inspectionCount": "검사 횟수",
       "lastInspection": "마지막 검사일시",
       "name": "이름",
@@ -176,6 +184,7 @@
       "type": "검사 종류"
     },
     "error": {
+      "cleaningLockedByStatus": "진행중인 스케줄은 업체 청소 여부를 수정할 수 없습니다",
       "load": "퇴사검사 대상자 목록을 불러올 수 없습니다"
     },
     "list": "검사 대상자 목록"
