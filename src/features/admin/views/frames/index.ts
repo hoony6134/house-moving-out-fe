@@ -9,3 +9,5 @@ export * from './target-list-frame';
 export * from './application-list-frame';
 export * from './admin-layout-frame';
 export * from './article-list-frame';
+export * from './create-article-frame';
+export * from './edit-article-frame';

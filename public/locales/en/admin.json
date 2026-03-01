@@ -20,10 +20,38 @@
     "list": "Inspection Application List"
   },
   "article": {
+    "create": {
+      "back": "Back to list",
+      "placeholder": "The create form will be implemented in the next task.",
+      "title": "Create Notice/FAQ"
+    },
+    "edit": {
+      "back": "Back to list",
+      "notFound": "Article not found.",
+      "placeholder": "The edit form will be implemented in the next task.",
+      "preview": "Current title preview",
+      "title": "Edit Notice/FAQ"
+    },
     "list": {
+      "actions": {
+        "edit": "Edit",
+        "hide": "Hide",
+        "show": "Show"
+      },
+      "columns": {
+        "actions": "Actions",
+        "title": "Title (KO)",
+        "updatedAt": "Updated At",
+        "visibility": "Visibility"
+      },
+      "create": "Create",
+      "empty": "No articles found.",
+      "faq": "FAQ",
+      "hidden": "Hidden",
       "nav": "Notice/FAQ",
-      "placeholder": "Notice and FAQ list will be implemented in the next task.",
-      "title": "Notice/FAQ List"
+      "notice": "Notice",
+      "title": "Notice/FAQ List",
+      "visible": "Visible"
     }
   },
   "floor_one": "{{count}}F",
