@@ -19,6 +19,13 @@
     },
     "list": "신청 목록"
   },
+  "article": {
+    "list": {
+      "nav": "공지/FAQ 관리",
+      "placeholder": "공지사항과 FAQ 목록은 다음 작업에서 구현됩니다.",
+      "title": "공지/FAQ 목록"
+    }
+  },
   "floor": "{{count}}층",
   "gender": {
     "female": "여자",

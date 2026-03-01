@@ -19,6 +19,13 @@
     },
     "list": "Inspection Application List"
   },
+  "article": {
+    "list": {
+      "nav": "Notice/FAQ",
+      "placeholder": "Notice and FAQ list will be implemented in the next task.",
+      "title": "Notice/FAQ List"
+    }
+  },
   "floor_one": "{{count}}F",
   "floor_other": "{{count}}F",
   "gender": {
