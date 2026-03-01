@@ -4,7 +4,7 @@ export type MoveOutSchedule = components['schemas']['MoveOutScheduleResDto'];
 export type InspectionSlot = components['schemas']['InspectionSlotResDto'];
 export type Target = components['schemas']['InspectionTargetsGroupedByRoomResDto'];
 export {
-  CreateMoveOutScheduleWithTargetsDtoCurrentSeason as Season,
+  PathsMoveOutInspectionTargetsGetParametersQueryCurrentSeason as Season,
   InspectorResDtoGender as Gender,
   MoveOutScheduleResDtoStatus as ScheduleStatus,
   InspectionTargetsGroupedByRoomResDtoInspectionType as InspectionType,
