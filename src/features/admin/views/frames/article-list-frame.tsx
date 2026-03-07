@@ -8,14 +8,22 @@ import { useTranslation } from 'react-i18next';
 import { Button, Loading } from '@/common/components';
 
 import { ArticleType } from '../../models';
-import { useChangeArticleVisibility, useFindFaq, useFindNotices } from '../../viewmodels';
+import { useChangeArticleVisibility, useFindArticles } from '../../viewmodels';
 
 export function ArticleListFrame() {
   const { t } = useTranslation('admin');
   const [type, setType] = useState<ArticleType>(ArticleType.NOTICE);
   const { mutateAsync: changeVisibility, isPending } = useChangeArticleVisibility();
-  const { data: notices, isLoading: isNoticesLoading } = useFindNotices({ offset: 0, limit: 100 });
-  const { data: faq, isLoading: isFaqLoading } = useFindFaq({ offset: 0, limit: 100 });
+  const { data: notices, isLoading: isNoticesLoading } = useFindArticles({
+    type: ArticleType.NOTICE,
+    offset: 0,
+    limit: 100,
+  });
+  const { data: faq, isLoading: isFaqLoading } = useFindArticles({
+    type: ArticleType.FAQ,
+    offset: 0,
+    limit: 100,
+  });
 
   const rows = useMemo(() => {
     const source = type === ArticleType.NOTICE ? notices : faq;

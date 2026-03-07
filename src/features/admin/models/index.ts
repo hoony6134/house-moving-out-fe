@@ -9,11 +9,11 @@ export type FindArticlesResponse = components['schemas']['FindArticlesResDto'];
 export type CreateArticleRequest = components['schemas']['CreateArticleReqDto'];
 export type UpdateArticleVisibilityRequest = components['schemas']['UpdateArticleVisibilityReqDto'];
 export {
-  PathsMoveOutInspectionTargetsGetParametersQueryCurrentSeason as Season,
+  CreateMoveOutScheduleWithTargetsDtoCurrentSeason as Season,
   InspectorResDtoGender as Gender,
   MoveOutScheduleResDtoStatus as ScheduleStatus,
   InspectionTargetsGroupedByRoomResDtoInspectionType as InspectionType,
-  CreateArticleReqDtoType as ArticleType,
+  PathsArticleGetParametersQueryType as ArticleType,
   ArticleDtoLanguage as ArticleLanguage,
 } from '@/@types/api-schema';
 export { ApiPaths } from '@/@types/api-schema';

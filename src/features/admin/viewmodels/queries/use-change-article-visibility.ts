@@ -14,10 +14,15 @@ export function useChangeArticleVisibility() {
   return $api.useMutation('patch', ApiPaths.ArticleController_changeArticleVisibility, {
     onSuccess: async (_data, variables) => {
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ['get', ApiPaths.ArticleController_findNotices] }),
-        queryClient.invalidateQueries({ queryKey: ['get', ApiPaths.ArticleController_findFaq] }),
         queryClient.invalidateQueries({
-          queryKey: ['get', ApiPaths.ArticleController_findArticleByUuid, variables.params.path.uuid],
+          queryKey: ['get', ApiPaths.ArticleController_findArticles],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: [
+            'get',
+            ApiPaths.ArticleController_findArticleByUuid,
+            variables.params.path.uuid,
+          ],
         }),
       ]);
     },

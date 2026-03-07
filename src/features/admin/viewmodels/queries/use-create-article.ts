@@ -14,8 +14,9 @@ export function useCreateArticle() {
   return $api.useMutation('post', ApiPaths.ArticleController_createArticle, {
     onSuccess: async () => {
       await Promise.all([
-        queryClient.invalidateQueries({ queryKey: ['get', ApiPaths.ArticleController_findNotices] }),
-        queryClient.invalidateQueries({ queryKey: ['get', ApiPaths.ArticleController_findFaq] }),
+        queryClient.invalidateQueries({
+          queryKey: ['get', ApiPaths.ArticleController_findArticles],
+        }),
       ]);
     },
     onError: (error) => {

@@ -5,18 +5,27 @@ import { toast } from 'sonner';
 
 import { $api } from '@/common/lib';
 
-import { ApiPaths } from '../../models';
+import { ApiPaths, type ArticleType } from '../../models';
 
-export function useFindNotices({ offset, limit }: { offset?: number; limit?: number } = {}) {
+export function useFindArticles({
+  type,
+  offset,
+  limit,
+}: {
+  type: ArticleType;
+  offset?: number;
+  limit?: number;
+}) {
   const { t } = useTranslation('admin');
   const { data, error, isError, isLoading } = $api.useQuery(
     'get',
-    ApiPaths.ArticleController_findNotices,
+    ApiPaths.ArticleController_findArticles,
     {
       params: {
         query: {
           offset,
           limit,
+          type,
         },
       },
     },
