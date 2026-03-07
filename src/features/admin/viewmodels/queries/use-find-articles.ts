@@ -33,8 +33,12 @@ export function useFindArticles({
 
   useEffect(() => {
     if (!isError) return;
-    if (error.statusCode === 401) {
+    if (error.statusCode === 401 || error.statusCode === 403) {
       toast.error(t('error.unauthorized', { ns: 'common' }));
+      return;
+    }
+    if (error.statusCode === 400) {
+      toast.error(t('error.badRequest', { ns: 'common' }));
       return;
     }
     toast.error(t('error.internalServerError', { ns: 'common' }));
