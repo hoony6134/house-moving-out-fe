@@ -13,7 +13,7 @@ import { useChangeArticleVisibility, useFindArticles } from '../../viewmodels';
 export function ArticleListFrame() {
   const { t } = useTranslation('admin');
   const [type, setType] = useState<ArticleType>(ArticleType.NOTICE);
-  const { mutateAsync: changeVisibility, isPending } = useChangeArticleVisibility();
+  const { mutate: changeVisibility, isPending } = useChangeArticleVisibility();
   const { data: notices, isLoading: isNoticesLoading } = useFindArticles({
     type: ArticleType.NOTICE,
     offset: 0,
