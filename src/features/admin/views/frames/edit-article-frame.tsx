@@ -62,14 +62,7 @@ export function EditArticleFrame() {
         </Button>
       </div>
       <ArticleForm
-        initialValues={{
-          type: data.type,
-          isVisible: data.isVisible,
-          titleKo: data.titleKo,
-          titleEn: data.titleEn,
-          contentKo: data.contentKo,
-          contentEn: data.contentEn,
-        }}
+        initialValues={data}
         submitLabel={t('article.edit.submit')}
         onSubmit={handleSubmit}
         isPending={isPending}
