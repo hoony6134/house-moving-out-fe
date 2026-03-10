@@ -19,6 +19,70 @@
     },
     "list": "Inspection Application List"
   },
+  "article": {
+    "create": {
+      "back": "Back to list",
+      "submit": "Create",
+      "success": "Article has been created.",
+      "title": "Create Notice/FAQ"
+    },
+    "edit": {
+      "back": "Back to list",
+      "notFound": "Article not found.",
+      "submit": "Save changes",
+      "success": "Article has been updated.",
+      "title": "Edit Notice/FAQ"
+    },
+    "form": {
+      "contentEn": {
+        "label": "Content (EN)",
+        "placeholder": "Enter English content."
+      },
+      "contentKo": {
+        "label": "Content (KO)",
+        "placeholder": "Enter Korean content."
+      },
+      "error": {
+        "formError": "Please check the form fields.",
+        "required": "This field is required."
+      },
+      "titleEn": {
+        "label": "Title (EN)",
+        "placeholder": "Enter English title."
+      },
+      "titleKo": {
+        "label": "Title (KO)",
+        "placeholder": "Enter Korean title."
+      },
+      "type": {
+        "label": "Article Type"
+      },
+      "visibility": {
+        "label": "Visibility"
+      }
+    },
+    "list": {
+      "actions": {
+        "edit": "Edit",
+        "hide": "Hide",
+        "show": "Show"
+      },
+      "columns": {
+        "actions": "Actions",
+        "title": "Title (KO)",
+        "updatedAt": "Updated At",
+        "visibility": "Visibility"
+      },
+      "create": "Create",
+      "empty": "No articles found.",
+      "faq": "FAQ",
+      "hidden": "Hidden",
+      "nav": "Notice/FAQ",
+      "notice": "Notice",
+      "title": "Notice/FAQ List",
+      "visible": "Visible"
+    }
+  },
   "floor_one": "{{count}}F",
   "floor_other": "{{count}}F",
   "gender": {
