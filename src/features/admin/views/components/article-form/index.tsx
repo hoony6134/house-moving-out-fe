@@ -1,37 +1,15 @@
-import { useEffect } from 'react';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
-import { z } from 'zod';
 
 import { Button, Input } from '@/common/components';
 import { cn } from '@/common/utils';
+import {
+  useArticleForm,
+  type ArticleInitialValues,
+  type ArticleFormValues,
+} from '@/features/admin/viewmodels';
 
 import { ArticleType } from '../../../models';
-
-const schema = z.object({
-  type: z.enum(ArticleType),
-  isVisible: z.boolean(),
-  titleKo: z.string().trim().min(1),
-  titleEn: z.string().trim().min(1),
-  contentKo: z.string().trim().min(1),
-  contentEn: z.string().trim().min(1),
-});
-
-type FormValues = z.infer<typeof schema>;
-
-const DEFAULT_VALUES: FormValues = {
-  type: ArticleType.NOTICE,
-  isVisible: true,
-  titleKo: '',
-  titleEn: '',
-  contentKo: '',
-  contentEn: '',
-};
-
-type InitialValues = Partial<FormValues>;
 
 export function ArticleForm({
   initialValues,
@@ -39,31 +17,14 @@ export function ArticleForm({
   onSubmit,
   isPending = false,
 }: {
-  initialValues?: InitialValues;
+  initialValues?: ArticleInitialValues;
   submitLabel: string;
-  onSubmit: (values: FormValues) => Promise<void>;
+  onSubmit: (values: ArticleFormValues) => Promise<void>;
   isPending?: boolean;
 }) {
   const { t } = useTranslation('admin');
-  const {
-    register,
-    formState: { errors, isSubmitting },
-    handleSubmit,
-    reset,
-    setValue,
-    control,
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: DEFAULT_VALUES,
-  });
-
-  useEffect(() => {
-    if (!initialValues) return;
-    reset({ ...DEFAULT_VALUES, ...initialValues });
-  }, [initialValues, reset]);
-
-  const type = useWatch({ name: 'type', control });
-  const isVisible = useWatch({ name: 'isVisible', control });
+  const { handleSubmit, setValue, type, register, isVisible, errors, isSubmitting } =
+    useArticleForm({ initialValues });
 
   return (
     <form
