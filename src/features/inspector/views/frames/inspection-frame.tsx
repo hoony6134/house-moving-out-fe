@@ -1,41 +1,49 @@
+import { Link, useParams } from '@tanstack/react-router';
+
 import { useTranslation } from 'react-i18next';
 
-import { Accordion, Button, Checkbox, LayoutCard } from '@/common/components';
+import { Accordion, Button, Checkbox, LayoutCard, Loading } from '@/common/components';
 import { cn } from '@/common/utils';
 
-type ChecklistSection = {
-  title: string;
-  items?: Record<string, string>;
-};
+import { checklist } from '../../models';
+import { useInspectionChecklistContext } from '../../viewmodels';
+import { SampleImageButton } from '../components';
 
 export function InspectionFrame() {
   const { t } = useTranslation('inspector');
-  const sections = t('checklist.sections', {
-    returnObjects: true,
-  }) as Record<string, ChecklistSection>;
+  const { uuid } = useParams({ from: '/_auth-required/_user/inspector/$uuid/' });
+  const {
+    form: { register },
+    getSectionProgress,
+    isAllChecked,
+    target,
+    isLoading,
+    roomType,
+  } = useInspectionChecklistContext();
 
-  // TODO: 체크 상태와 연동
-  const isAllChecked = false;
+  if (isLoading) return <Loading />;
+  if (!target) return <div>{t('error.notFound')}</div>;
 
   return (
-    <LayoutCard.Root>
+    <LayoutCard.Root isLoading={isLoading}>
       <LayoutCard.Header>
         <LayoutCard.Text>
-          {/* TODO: 실제 방/입주자 정보 연동 */}
-          <LayoutCard.Title>T동 012호 - 홍길동 (20250000)</LayoutCard.Title>
+          <LayoutCard.Title>
+            {`${target.roomNumber} - ${target.residents.map((resident) => resident.name).join(', ')}`}
+          </LayoutCard.Title>
         </LayoutCard.Text>
       </LayoutCard.Header>
       <LayoutCard.Body className="gap-3">
-        {Object.entries(sections).map(([sectionKey, section]) => {
-          const itemEntries = Object.entries(section.items ?? {}) as [string, string][];
-          const totalCount = itemEntries.length;
-          const completedCount = 0; // TODO: 체크 상태와 연동
-          const isCompleted = totalCount > 0 && completedCount === totalCount;
+        {[...checklist.sections, 'issues' as const].map((sectionKey) => {
+          if (!roomType) return null;
+          const itemEntries = checklist[roomType][sectionKey];
+          if (itemEntries.length === 0) return null;
+          const { totalCount, completedCount, isCompleted } = getSectionProgress(sectionKey);
 
           return (
             <Accordion.Root key={sectionKey}>
               <Accordion.Header>
-                <Accordion.Title>{section.title}</Accordion.Title>
+                <Accordion.Title>{t(`checklist.sections.${sectionKey}`)}</Accordion.Title>
                 <span
                   className={cn(
                     'text-sub ml-auto font-medium',
@@ -45,16 +53,30 @@ export function InspectionFrame() {
                   ({completedCount}/{totalCount})
                 </span>
               </Accordion.Header>
-              <Accordion.Content>
-                <ul className="text-box2 text-text-black flex flex-col gap-3">
-                  {itemEntries.map(([itemKey, label]) => (
-                    <li key={itemKey} className="flex items-center gap-2">
-                      <label className="flex w-full cursor-pointer items-center justify-between gap-2">
-                        <span>{label}</span>
-                        <Checkbox />
-                      </label>
-                    </li>
-                  ))}
+              <Accordion.Content className="p-2 py-1.5">
+                <ul className="text-box2 text-text-black flex flex-col">
+                  {itemEntries.map((item) => {
+                    if (item === null) return null;
+                    const [itemKey, ...images] = item;
+                    return (
+                      <li key={itemKey} className="flex items-center justify-between gap-2 pl-2">
+                        <span className="flex items-center gap-2">
+                          <span id={`checklist-item-label-${itemKey}`}>
+                            {t(`checklist.items.${itemKey}`)}
+                          </span>
+                          {images.map((image, index) => (
+                            <SampleImageButton key={index} image={image} />
+                          ))}
+                        </span>
+                        <label
+                          className="cursor-pointer px-2 py-1.5"
+                          aria-labelledby={`checklist-item-label-${itemKey}`}
+                        >
+                          <Checkbox {...register(`items.${itemKey}`)} />
+                        </label>
+                      </li>
+                    );
+                  })}
                 </ul>
               </Accordion.Content>
             </Accordion.Root>
@@ -62,15 +84,11 @@ export function InspectionFrame() {
         })}
       </LayoutCard.Body>
       <LayoutCard.Footer>
-        {isAllChecked ? (
-          <Button variant="default" className="w-full">
-            {t('checklist.cta.allClear')}
-          </Button>
-        ) : (
-          <Button variant="failed" className="w-full">
-            {t('checklist.cta.hasIssues')}
-          </Button>
-        )}
+        <Button variant={isAllChecked ? 'default' : 'failed'} className="w-full" asChild>
+          <Link to="/inspector/$uuid/note" params={{ uuid }}>
+            {isAllChecked ? t('checklist.cta.allClear') : t('checklist.cta.hasIssues')}
+          </Link>
+        </Button>
       </LayoutCard.Footer>
     </LayoutCard.Root>
   );
