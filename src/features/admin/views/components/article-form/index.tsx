@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button, Input } from '@/common/components';
+import { cn } from '@/common/utils';
 
 import { ArticleType } from '../../../models';
 
@@ -123,12 +124,12 @@ export function ArticleForm({
       <div>
         <label className="text-sub2 text-text-black">{t('article.form.contentKo.label')}</label>
         <textarea
-          className={[
+          className={cn(
             'bg-bg-white w-full rounded-lg border-[1.5px] px-4 py-3',
             'text-box text-text-black placeholder:text-text-gray',
             'focus-visible:border-primary-main focus-visible:ring-primary-main focus-visible:ring-2 focus-visible:outline-none',
             errors.contentKo ? 'border-status-fail' : 'border-icon-gray',
-          ].join(' ')}
+          )}
           rows={8}
           placeholder={t('article.form.contentKo.placeholder')}
           {...register('contentKo')}
@@ -141,12 +142,12 @@ export function ArticleForm({
       <div>
         <label className="text-sub2 text-text-black">{t('article.form.contentEn.label')}</label>
         <textarea
-          className={[
+          className={cn(
             'bg-bg-white w-full rounded-lg border-[1.5px] px-4 py-3',
             'text-box text-text-black placeholder:text-text-gray',
             'focus-visible:border-primary-main focus-visible:ring-primary-main focus-visible:ring-2 focus-visible:outline-none',
             errors.contentEn ? 'border-status-fail' : 'border-icon-gray',
-          ].join(' ')}
+          )}
           rows={8}
           placeholder={t('article.form.contentEn.placeholder')}
           {...register('contentEn')}
