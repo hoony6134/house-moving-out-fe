@@ -51,7 +51,7 @@ export function UserLayoutFrame() {
                   <Drawer.Title>{t('inquiryDrawer.title')}</Drawer.Title>
                 </Drawer.Header>
                 <Drawer.Body>
-                  <p>{t('inquiryDrawer.instagram')}</p>
+                  <p>{t('inquiryDrawer.kakaotalk')}</p>
                   <p>{t('inquiryDrawer.email')}</p>
                   <br />
                   <a
