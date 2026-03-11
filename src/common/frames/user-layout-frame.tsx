@@ -52,7 +52,7 @@ export function UserLayoutFrame() {
                 </Drawer.Header>
                 <Drawer.Body>
                   <a
-                    href="http://pf.kakao.com/_BIthX"
+                    href="https://pf.kakao.com/_BIthX"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-underline cursor-pointer"
