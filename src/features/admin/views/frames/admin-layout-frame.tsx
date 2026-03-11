@@ -47,6 +47,12 @@ export function AdminLayoutFrame() {
             >
               {t('schedule.list')}
             </Link>
+            <Link
+              to="/admin/articles"
+              className="text-sub2 text-text-black hover:bg-bg-surface hover:text-primary-main rounded-lg px-3 py-2 font-medium transition-colors"
+            >
+              {t('article.list.nav')}
+            </Link>
           </nav>
           <div className="px-2">
             <LanguageToggle />
